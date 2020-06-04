@@ -4,45 +4,23 @@ import time
 import mouse
 import win32api, win32con
 
-#  Toggles (True or False) for whether the mouse control is active
-inputToggles = {
-    'move_mouse'    : True,
-    'click'         : True,
-    'double_click'  : True,
-    'drag'          : True,
-
-}
-
-#  Toggles (True or False) for whether the keyboard control is active
-keyboardToggles = {
-    'space'         : True,
-    'up'            : True,
-    'down'          : True,
-    'left'          : True,
-    'right'         : True,
-    'w'             : True,
-    'a'             : True,
-    's'             : True,
-    'd'             : True,
-    'f'             : True,
-    'g'             : True,
-    'enter'         : True,
-}
+#  Input toggles are loaded separately to make altering them easier to understand
+from Keyboard_Mouse_Toggles import MOUSE_TOGGLES, KEYBOARD_TOGGLES
 
 def checkMessageForInputToggles(message):
     message = message.lower()
 
-    if "move_mouse" in message and inputToggles['move_mouse']:
+    if "move_mouse" in message and MOUSE_TOGGLES['move_mouse']:
         processMoveMouseCommand(message)
-    elif "double_click" in message and inputToggles['double_click']:
+    elif "double_click" in message and MOUSE_TOGGLES['double_click']:
         pyautogui.doubleClick()
-    elif "click" in message and inputToggles['click']:
+    elif "click" in message and MOUSE_TOGGLES['click']:
         pyautogui.click()
-    elif "drag" in message and inputToggles['drag']:
+    elif "drag" in message and MOUSE_TOGGLES['drag']:
         processDragCommand(message)
     else:
-        for keyString in keyboardToggles:
-            if keyString in message and keyboardToggles[keyString]:
+        for keyString in KEYBOARD_TOGGLES:
+            if keyString in message and KEYBOARD_TOGGLES[keyString]:
                 keyboardKeyTap(message)
                 break
 

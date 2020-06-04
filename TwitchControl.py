@@ -1,5 +1,5 @@
 #  Password is loaded from a separate file so it isn't accidentally shared
-from _Twitch_Channel_Details import CHANNEL_NAME, BOT_NICKNAME, CHANNEL_PASS
+from Twitch_Channel_Details import CHANNEL_NAME, BOT_NICKNAME, CHANNEL_PASS
 
 from MouseAndKeyboardControl import checkMessageForInputToggles
 
