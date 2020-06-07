@@ -9,10 +9,11 @@ import threading
 SERVER = "irc.twitch.tv"
 PORT = 6667
 IRC_HANDLE = socket.socket()
+ChatUser = ""
 ChatMessage = ""
 
 #  NOTE: This should be run before any of the twitch control commands
-def ConnectToTwitchChannel():
+def connectToTwitchChannel():
     global CHANNEL_NAME
     global BOT_NICKNAME
 
@@ -87,7 +88,8 @@ def twitchControl():
                         #print("\n")
                         continue
                 else:
-                    #user = getChatUser(line)
+                    global ChatUser
+                    ChatUser = getChatUser(line)
                     global ChatMessage
                     ChatMessage = getChatMessage(line)
                     #print("MESSAGE: " + ChatMessage)
@@ -101,7 +103,7 @@ def chatCommandControl():
         if ChatMessage != "":
             #print(ChatMessage)
             ChatMessage = ChatMessage.lower()
-            checkMessageForInputToggles(ChatMessage)
+            checkMessageForInputToggles(ChatUser, ChatMessage)
             ChatMessage = ""
 
 

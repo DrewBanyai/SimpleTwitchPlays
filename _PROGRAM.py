@@ -1,6 +1,6 @@
-from TwitchControl import ConnectToTwitchChannel, startupTwitchControl
+from TwitchControl import connectToTwitchChannel, startupTwitchControl
 
 #  Actual program load + loop
 if __name__ == '__main__':
-    ConnectToTwitchChannel()
+    connectToTwitchChannel()
     startupTwitchControl()

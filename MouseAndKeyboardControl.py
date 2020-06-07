@@ -7,22 +7,29 @@ import win32api, win32con
 #  Input toggles are loaded separately to make altering them easier to understand
 from Keyboard_Mouse_Toggles import MOUSE_TOGGLES, KEYBOARD_TOGGLES
 
-def checkMessageForInputToggles(message):
+def checkMessageForInputToggles(user, message):
     message = message.lower()
 
     if "move_mouse" in message and MOUSE_TOGGLES['move_mouse']:
         processMoveMouseCommand(message)
-    elif "double_click" in message and MOUSE_TOGGLES['double_click']:
+        return
+
+    if "double_click" in message and MOUSE_TOGGLES['double_click']:
         pyautogui.doubleClick()
-    elif "click" in message and MOUSE_TOGGLES['click']:
+        return
+
+    if "click" in message and MOUSE_TOGGLES['click']:
         pyautogui.click()
-    elif "drag" in message and MOUSE_TOGGLES['drag']:
+        return
+
+    if "drag" in message and MOUSE_TOGGLES['drag']:
         processDragCommand(message)
-    else:
-        for keyString in KEYBOARD_TOGGLES:
-            if keyString in message and KEYBOARD_TOGGLES[keyString]:
-                keyboardKeyTap(message)
-                break
+        return
+
+    for keyString in KEYBOARD_TOGGLES:
+        if keyString in message and KEYBOARD_TOGGLES[keyString]:
+            keyboardKeyTap(message)
+            return
 
 def processMoveMouseCommand(message):
     mouseMoveMessage = message.split(" ")
@@ -58,10 +65,17 @@ def processDragCommand(message):
     
     dragMouse(int(mouseDragMessage[1]), int(mouseDragMessage[2]))
 
+#  Standard keyboard key down using pyautogui
+def pressKey(key):
+    pyautogui.keyDown(key)
+
+#  Standard keyboard key up using pyautogui
+def unpressKey(key):
+    pyautogui.keyUp(key)
+    
 #  Standard keyboard key tap using pyautogui
 def keyboardKeyTap(keystring):
-    pyautogui.keyDown(keystring)
-    pyautogui.keyUp(keystring)
+    pyautogui.press(keystring)
 
 #  Standard mouse drag using pyautogui with checks
 def dragMouse(xDelta, yDelta):
