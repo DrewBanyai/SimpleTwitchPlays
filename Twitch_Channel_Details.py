@@ -5,4 +5,4 @@ CHANNEL_NAME = "drewthebear"
 BOT_NICKNAME = "DrewTheBear"
 
 # CHANNEL_PASS is your channel's password (get one at https://twitchapps.com/tmi/ by connecting with your twitch account)
-CHANNEL_PASS = "oauth:kr4687i6topkkj76mmg7rklvcadwyc"
+CHANNEL_PASS = ""
